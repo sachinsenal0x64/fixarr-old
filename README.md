@@ -55,7 +55,7 @@ IF YOU WANT TO MAKE STANDALONE AND RUN AS EXE AND MORE FASTER YOU CAN USE NUITKA
 ```compile
 
 
-[Install C Compiler and set gcc env path in os to work with this also setup clang env in your os ]
+[Install C Compiler to work with this also setup GCC env path in your os ]
 
 pip -v install nuitka 
 open cmd in fixarr path
