@@ -63,7 +63,7 @@ open your cmd in fixarr path
 
 pip -v install nuitka 
 
-nuitka --mingw64 --standalone --windows-icon-from-ico=./assets/i.ico --include-data-dir=./assets=./assets --onefile --windows-company-name=FIXARR --windows-product-version=1.0.0 --plugin-enable=tk-inter --windows-disable-console fixarr.py
+nuitka --mingw64 --standalone --windows-icon-from-ico=./assets/i.ico --include-data-dir=./assets=./assets --onefile --windows-company-name=FIXARR --windows-product-version=1.0.0 --plugin-enable=tk-inter fixarr.py
 ```
 
 ## 🏮 NOTE
