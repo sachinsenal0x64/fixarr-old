@@ -57,7 +57,7 @@ For Windows :
 
 ```compile
 
-[Install C Compiler  (https://www.fosshub.com/Code-Blocks.html?dwl=codeblocks-20.03-setup.exe) to work with this also setup GCC env path in your os  ] 
+[Install C Compiler  (http://www.codeblocks.org/downloads/binaries/) to work with this also setup GCC env path in your os ] 
 
 pip -v install nuitka 
 open cmd in fixarr path
