@@ -59,7 +59,7 @@ For Windows :
 
 [Install C Compiler  (http://www.codeblocks.org/downloads/binaries/) to work with this also setup GCC env path in your os ] 
 
-open your cmd in fixarr path
+open your cmd in Fixarr PATH
 
 pip -v install nuitka 
 
