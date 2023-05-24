@@ -21,9 +21,13 @@ For Linux :
 
 For Ubuntu And Other Debian Based Distro With APT:
 
+sudo apt-get install software-properties-common
+sudo apt-get install python3.10
 sudo apt-get install python3-tk
 
 For Fedora:
+
+sudo dnf install python3
 sudo dnf install python3-tkinter
 
 pip3 install -r requirements.txt
@@ -37,6 +41,9 @@ For macOS :
 
 For Mac OS With BREW:
 
+if your already not install brew then install its from offical site : https://brew.sh/#install 
+
+brew install python3
 brew install python-tk@3.10
 pip3 install -r requirements.txt
 python3 fixarr.py
