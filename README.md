@@ -63,7 +63,7 @@
 
 ```Terminal
 
-For Ubuntu And Other Debian Based Distro With APT:
+Ubuntu or Any Other Debian Based Distro :
 
 sudo apt-get install software-properties-common
 sudo apt-get install python3.10
@@ -72,7 +72,7 @@ sudo apt-get install python3-tk
 pip3 install -r requirements.txt
 python3 fixarr.py
 
-For Fedora:
+Fedora:
 
 sudo dnf install python3
 sudo dnf install python3-tkinter
@@ -111,9 +111,9 @@ First Install Python
 pip install -r requirements.txt
 python fixarr.py
 ```
+<br>
 
 IF YOU WANT TO MAKE OWN STANDALONE EXE USE NUITKA TO COMPILE SOURCE CODE INTO C AFTER ITS CAN RUN AS EXE.  OR  YOU CAN JUST DOWNLOAD PRE BUILD INSTALLER FROM [RELEASES](https://github.com/sachinsenal0x64/FIXARR/releases)
-
 
 <br>
 
