@@ -25,7 +25,7 @@
 -  🐟 JELLYFIN BACKUP (⭕ in progress)
 -  ❄ EMBY BACKUP (⭕ in progress)
 -  ⏬ MOVIE & TV SEACHER (⭕ in progress)
--  ♻ DELETE UNNECESSARY FILES. (NFO,SRT)
+-  ♻ PURG UNNECESSARY FILES (NFO,SRT)
 
 <br>
 
