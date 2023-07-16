@@ -16,6 +16,19 @@
 <br>
 
 
+##  🚀 Features
+
+-  🎬 MOVIE RENAMER
+-  📺 TV RENAMER (⭕ in progress)
+-  🔺 PLEX BACKUP
+-  ⚡️ MULTI THREADING 
+-  🐟 JELLYFIN BACKUP (⭕ in progress)
+-  ❄ EMBY BACKUP (⭕ in progress)
+-  ⏬ MOVIE & TV SEACHER (⭕ in progress)
+
+<br>
+
+
 ## 💡 Pros
 
 - 🍕 Accurate Results (Even Torrent Movies Can Rename Without Any Issue)
@@ -23,7 +36,6 @@
 - 🧰 All in One Place
 - 🧾 Easy to Use
   
-
 <br>
 
 
@@ -32,7 +44,9 @@
 - 🐌 Slowly Develop
 
 
+
 <br>
+
 
 # 📐 INSTALLATION
 
