@@ -130,7 +130,7 @@ nuitka --mingw64 --standalone --windows-icon-from-ico=./assets/i.ico --include-d
 ```
 <br>
 
-## 🥰 MOVIE & TV API CREDITS
+## 💡 CREDITS
 
 <p style="text-align:center;" align="center">
   <img align="center" src="https://github.com/FIXARR/FIXARR/blob/279c46c7744bfdbb2e99dd802637cea65d2fdc3d/assets/tmdb.svg" height="200"/>
