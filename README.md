@@ -40,9 +40,11 @@
 
 <br>
 
-## 🏮 NOTE
 
-## 🚀 Some Features are Still in Development :)
+## 🆕 BETA CHANNEL
+
+[BETA](https://github.com/sachinsenal0x64/FIXARR)
+
 
 <br>
 
@@ -125,6 +127,7 @@ nuitka --mingw64 --standalone --windows-icon-from-ico=./assets/i.ico --include-d
 ```
 
 <br>
+
 
 ## 💡 CREDITS
 
