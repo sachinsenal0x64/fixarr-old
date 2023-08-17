@@ -16,7 +16,7 @@
 
 - 🎬 MOVIE RENAMER
 - 📺 TV RENAMER
-- 👧 ANIME RENAMER
+- 👧 ANIME RENAMER (⭕ in progress)
 - 🔺 PLEX BACKUP
 - ⚡️ MULTI THREADING
 - ♻ PURG UNNECESSARY FILES (NFO,SRT)
@@ -81,11 +81,11 @@ TMDB_API_KEY=tmdbkey
 
 <br>
 
-🐧For Linux :
+🐧For GNU/Linux :
 
 ```Terminal
 
-🐧 Ubuntu or Any Other Debian Based Distro :
+🐧 Debian Based Distros :
 
 sudo apt-get install software-properties-common
 sudo apt-get install python3.10
