@@ -1,6 +1,6 @@
 __author__ = "FIXARR"
 
-__version__ = "1.0.0"
+__version__ = "2.0.0"
 
 
 import re
@@ -26,30 +26,16 @@ from rich.console import Console
 import colorama
 from colorama import Fore, Style, Back
 import customtkinter as ctk
-from PIL import Image
+from PIL import Image, ImageTk
 import tkinter as tk
 from tkinter import simpledialog, filedialog
-from ctypes import windll
-import ctypes
-from dotenv import load_dotenv,find_dotenv
+from dotenv import load_dotenv, find_dotenv
 import rich
-from duckduckgo_search import DDGS
 from itertools import islice
 import PTN
-from thefuzz import fuzz,process
+from thefuzz import fuzz, process
+import ctypes
 
-
-
-try:
-    windll.shcore.SetProcessDpiAwareness(2)
-
-except:
-
-    pass
-
-
-user32 = ctypes.windll.user32
-screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 
 
 ctk.set_appearance_mode("dark")
@@ -63,66 +49,73 @@ load_dotenv(find_dotenv())
 tmdb = os.getenv("TMDB_API_KEY")
 
 
-budle_dir = getattr(sys,"_MEIPASS",path.abspath(path.dirname(__file__)))
+
+if platform.uname()[0] == "Windows":
+    ctypes.windll.shcore.SetProcessDpiAwareness(2)
+    user32 = ctypes.windll.user32
+    screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+
+    if screensize[0] == 3840 and screensize[1] == 2160:
+        app.geometry("1500x900")
+        ctk.set_widget_scaling(2.0)
+
+    elif screensize[0] == 2560 and screensize[1] == 1440:
+        app.geometry("1388x800")
+        ctk.set_widget_scaling(1.0)
+
+    elif screensize[0] == 1920 and screensize[1] == 1080:
+        app.geometry("1388x768")
+
+    elif screensize[0] == 1600 and screensize[1] == 900:
+        app.geometry("1350x580")
+
+    elif screensize[0] == 1280 and screensize[1] == 720:
+        app.geometry("1230x490")
+
+    else:
+        app.geometry("1000x600")
+
+# elif platform.uname()[0] == "Linux":
+#     continue
 
 
 
-path_to_app = path.join(budle_dir,'assets','plex.png')
+budle_dir = getattr(sys, "_MEIPASS", path.abspath(path.dirname(__file__)))
 
 
-path_to_app_1 = path.join(budle_dir,'assets','i.ico')
+path_to_app = path.join(budle_dir, "assets", "plex.png")
 
 
-path_to_app_2 = path.join(budle_dir,'assets','movie.png')
+path_to_app_1 = path.join(budle_dir, "assets", "i.ico")
 
 
-path_to_app_3 = path.join(budle_dir,'assets','tv.png')
+path_to_app_2 = path.join(budle_dir, "assets", "movie.png")
 
 
-path_to_app_4 = path.join(budle_dir,'assets','delete.png')
+path_to_app_3 = path.join(budle_dir, "assets", "tv.png")
 
 
-path_to_app_5 = path.join(budle_dir,'assets','jellyfin.png')
+path_to_app_4 = path.join(budle_dir, "assets", "delete.png")
 
 
-path_to_app_6 = path.join(budle_dir,'assets','emby.png')
+path_to_app_5 = path.join(budle_dir, "assets", "jellyfin.png")
 
 
-path_to_app_7 = path.join(budle_dir,'assets','logout.png')
+path_to_app_6 = path.join(budle_dir, "assets", "emby.png")
 
 
+path_to_app_7 = path.join(budle_dir, "assets", "logout.png")
 
-app.iconbitmap(path_to_app_1)
-
-
-if screensize[0] == 3840 and screensize[1] == 2160:
-    app.geometry("1500x900")
-    ctk.set_widget_scaling(2.0)
-    
-
-elif screensize[0] == 2560 and screensize[1] == 1440:
-    app.geometry("1388x800")
-    ctk.set_widget_scaling(1.0)
-
-
-elif screensize[0] == 1920 and screensize[1] == 1080:
-    app.geometry("1388x768")
-
-
-elif screensize[0] == 1600 and screensize[1] == 900:
-    app.geometry("1350x580")
-
-
-elif screensize[0] == 1280 and screensize[1] == 720:
-    app.geometry("1230x490")
-
-else:
-    app.geometry("1000x600")
 
 
 app.title("FIXARR")
 
 app.resizable(width=True, height=True)
+
+log= Image.open(path_to_app_1)
+logo = ImageTk.PhotoImage(log)
+
+app.tk.call('wm', 'iconphoto', app._w, logo)
 
 
 
@@ -152,9 +145,9 @@ tabview_2.rowconfigure(3, weight=1)
 
 
 image = ctk.CTkImage(
-    light_image=Image.open(path_to_app), 
-    dark_image=Image.open(path_to_app), 
-    size=(64, 64)
+    light_image=Image.open(path_to_app),
+    dark_image=Image.open(path_to_app),
+    size=(64, 64),
 )
 
 image_2 = ctk.CTkImage(
@@ -164,7 +157,9 @@ image_2 = ctk.CTkImage(
 )
 
 image_3 = ctk.CTkImage(
-    light_image=Image.open(path_to_app_3), dark_image=Image.open(path_to_app_3), size=(64, 64)
+    light_image=Image.open(path_to_app_3),
+    dark_image=Image.open(path_to_app_3),
+    size=(64, 64),
 )
 
 
@@ -183,7 +178,9 @@ image_5 = ctk.CTkImage(
 
 
 image_6 = ctk.CTkImage(
-    light_image=Image.open(path_to_app_6), dark_image=Image.open(path_to_app_6), size=(64, 64)
+    light_image=Image.open(path_to_app_6),
+    dark_image=Image.open(path_to_app_6),
+    size=(64, 64),
 )
 
 
@@ -194,12 +191,10 @@ image_7 = ctk.CTkImage(
 )
 
 
-
-
 bu = tabview.add("Backup")
 mv = tabview.add("Movie/Renamer")
 tv = tabview.add("TV/Renamer")
-de =tabview.add("Delete")
+de = tabview.add("Delete")
 
 
 out = tabview_2.add("Rename Done")
@@ -209,7 +204,6 @@ done = tabview_2.add("Backup Done")
 rmf = tabview_2.add("Delete Done")
 
 fe = tabview_2.add("Searcher")
-
 
 
 class BrowseDialog(simpledialog.Dialog):
@@ -229,7 +223,6 @@ class BrowseDialog(simpledialog.Dialog):
             self.result = filedialog.askdirectory()
         else:
             self.result = None
-
 
 
 def remove_empty_directories(directory):
@@ -257,7 +250,6 @@ def del_fi():
             rem.insert("end", result)
             rem.configure(state="disabled")
 
-                
         elif os.path.isdir(result):
             for current_root, dirs, files in os.walk(result):
                 for file in files:
@@ -266,18 +258,14 @@ def del_fi():
                     # rem.delete("1.0", "end")
                     rem.insert("end", file_path + "\n")
                     rem.configure(state="disabled")
-                          
-            
+
         deletes(result)
 
         return result
     return None
 
 
-
 def deletes(result):
-    
-    
     TOTAL_FILES_DELETED = 0
 
     ex = [
@@ -308,11 +296,8 @@ def deletes(result):
     #             "Enter the name of the folders to delete, separated by commas: "
     #         ).split(",")
     #     ]
-    
-    
-    
-    for path, dirs, files in os.walk(result, topdown=False):
 
+    for path, dirs, files in os.walk(result, topdown=False):
         for name in files:
             rename_path = pathlib.PurePath(path, name)
             print(rename_path)
@@ -322,7 +307,7 @@ def deletes(result):
             )
 
             t = num_files
-            
+
             for extension in ex:
                 if name.endswith(extension):
                     if not name.endswith(tuple(extension)):
@@ -331,26 +316,22 @@ def deletes(result):
                         print(f"Deleting file: {os.path.join(path, name)}")
                         os.remove(os.path.join(path, name))
                         TOTAL_FILES_DELETED += 1
-                        
 
-                    
-                        
-        for current_root, dirs, files in os.walk(result,topdown=False):
+        for current_root, dirs, files in os.walk(result, topdown=False):
             for file in files:
                 rem.configure(state="normal")
                 file_path = os.path.join(current_root, file)
                 # rem.delete("1.0", "end")
-                rem.insert("end",file_path + "\n")
+                rem.insert("end", file_path + "\n")
                 rem.configure(state="disabled")
-                
+
         label_8.configure(
-                    text=f"✅ TOTAL : {TOTAL_FILES_DELETED} FILES DELETED",
-                    font=("Impact", 18),
-                    state="normal",
-                    text_color="#bf214b",
-                        )
+            text=f"✅ TOTAL : {TOTAL_FILES_DELETED} FILES DELETED",
+            font=("Impact", 18),
+            state="normal",
+            text_color="#bf214b",
+        )
         label_8.pack()
-    
 
         # for folder in dirs:
         #     if folder.lower() in folders_to_delete:
@@ -361,12 +342,11 @@ def deletes(result):
         #         time.sleep(0.5)
 
 
-
 def browse():
     result = filedialog.askdirectory()
     label.pack_forget()
     if result:
-        if os.path.isfile(result) :
+        if os.path.isfile(result):
             file_folder_listbox.configure(state="normal")
             file_folder_listbox.insert("end", result)
             file_folder_listbox.configure(state="disabled")
@@ -385,7 +365,6 @@ def browse():
     return None
 
 
-
 def tv_browse():
     result = filedialog.askdirectory()
     if result:
@@ -393,7 +372,7 @@ def tv_browse():
             file_folder_listbox.configure(state="normal")
             file_folder_listbox.insert("end", result)
             file_folder_listbox.configure(state="disabled")
-              
+
         elif os.path.isdir(result):
             for current_root, dirs, files in os.walk(result):
                 for file in files:
@@ -402,19 +381,17 @@ def tv_browse():
                     # file_folder_listbox.delete("1.0", "end")
                     file_folder_listbox.insert("end", file_path + "\n")
                     file_folder_listbox.configure(state="disabled")
-                    
 
         tv_renamer(result)
         return result
 
     return None
-    
 
 
 # Movie Renamer
 
+
 def movie_rename(file_or_folder):
-    
     start_time = time.perf_counter()
 
     TOTAL_FILES_DELETED = 0
@@ -466,7 +443,6 @@ def movie_rename(file_or_folder):
     ]
 
     for path, dirs, files in os.walk(file_or_folder):
-
         for name in files:
             rename_path = pathlib.PurePath(path, name)
             print(rename_path)
@@ -475,9 +451,7 @@ def movie_rename(file_or_folder):
                 [len(files) for path, dirs, files in os.walk(file_or_folder)]
             )
 
-
             t = num_files
-
 
             # if ext not in name then dont do anything else rename
             if not name.endswith(tuple(ext)):
@@ -491,7 +465,7 @@ def movie_rename(file_or_folder):
                 year_match = re.search(
                     r"^(.+?)(?=\s?(?:\()?(\d{4})(?:\))?\s?)", base_name, re.IGNORECASE
                 )
-                
+
                 if year_match:
                     # Extract the movie title and year from the file name
                     movie_title = (
@@ -499,24 +473,31 @@ def movie_rename(file_or_folder):
                         .split("- ")[-1]
                         .split("= ")[-1]
                         .split(" – ")[-1]
-                        .replace(".", " ").strip()
-                        .replace("_", " ").strip()
-                        .replace("-", " ").strip()
-                        
+                        .replace(".", " ")
+                        .strip()
+                        .replace("_", " ")
+                        .strip()
+                        .replace("-", " ")
+                        .strip()
                     )
 
                     print(movie_title)
-                    
+
                     year = year_match.group(2)
-                    
+
                     rich.print(year)
 
                 else:
                     # If the year is not present, set it to an empty string
                     year = ""
-                    movie_title = base_name.replace(".", " ").replace("_", " ").replace(" - "," ").replace(" = "," ").strip()
+                    movie_title = (
+                        base_name.replace(".", " ")
+                        .replace("_", " ")
+                        .replace(" - ", " ")
+                        .replace(" = ", " ")
+                        .strip()
+                    )
                     rich.print(movie_title)
-                
 
                 # Add the year parameter to the movie db API URL
                 url = f"https://api.themoviedb.org/3/search/movie?{urlencode({'api_key':API_KEY,'query':movie_title,'year':year,'include_adult':True,'with_genres':0})}"
@@ -540,7 +521,7 @@ def movie_rename(file_or_folder):
                         ">": " ",
                         "|": " ",
                         ".": " ",
-                        "$":" "
+                        "$": " ",
                     }
 
                     for old, new in err.items():
@@ -551,9 +532,7 @@ def movie_rename(file_or_folder):
                     print(date)
 
                     # Construct the new file name with the extracted movie title, release year, and original file extension
-                    new_name = (
-                        f"{result} ({date}){ext}" if year else f"{result}{ext}"
-                    )
+                    new_name = f"{result} ({date}){ext}" if year else f"{result}{ext}"
 
                     i = 1
 
@@ -563,7 +542,6 @@ def movie_rename(file_or_folder):
                     os.rename(old_path, new_path)
                     mov_progressbar.stop()
 
-
                     # create files for folders and rename
                     folder_name = f"{result} ({date})" if year else f"{result}"
                     folder_path = os.path.join(file_or_folder, folder_name)
@@ -571,59 +549,53 @@ def movie_rename(file_or_folder):
                     if not os.path.exists(folder_path):
                         os.makedirs(folder_path)
 
-
                     # move renamed file to folder
                     dest_path = os.path.join(folder_path, new_name)
-                    
+
                     try:
                         shutil.move(new_path, dest_path)
                     except shutil.Error:
                         # failed to move file to folder, restore original filename
                         os.rename(new_path, old_path)
 
-                    
                     with tqdm(total=i, desc="Renaming : ", unit="Files") as pbar:
-                                time.sleep(1)
-                                pbar.update(1)
-                                mv_p = pbar.n / i * 100
-                                pbar.update(0)
-                                mv_per = str(int(mv_p))
-                                mv_precent.configure(text=mv_per + "%")
-                                mv_precent.update()
-                                mov_progressbar.set(pbar.n / i )
-                                mov_progressbar.update()    
-                        
+                        time.sleep(1)
+                        pbar.update(1)
+                        mv_p = pbar.n / i * 100
+                        pbar.update(0)
+                        mv_per = str(int(mv_p))
+                        mv_precent.configure(text=mv_per + "%")
+                        mv_precent.update()
+                        mov_progressbar.set(pbar.n / i)
+                        mov_progressbar.update()
 
                     TOTAL_FILES_RENAMED += 1
-                    
+
                     remove_empty_directories(file_or_folder)
 
-
-                else:  
+                else:
                     pass
-                
-                    
-                    
-    for current_root, dirs, files in os.walk(file_or_folder,topdown=False):
+
+    for current_root, dirs, files in os.walk(file_or_folder, topdown=False):
         for file in files:
             file_folder_listbox.configure(state="normal")
             file_path = os.path.join(current_root, file)
             # rem.delete("1.0", "end")
-            file_folder_listbox.insert("end",file_path + "\n")
+            file_folder_listbox.insert("end", file_path + "\n")
             file_folder_listbox.configure(state="disabled")
-            
-
-                        
-
 
         end_time = time.perf_counter()
 
         total_time = end_time - start_time
-        
+
         console.print(f"Total Files Deleted: {TOTAL_FILES_DELETED}", style="bold red")
-        console.print(f"Total Folders Deleted: {TOTAL_FOLDERS_DELETED}", style="bold red")
+        console.print(
+            f"Total Folders Deleted: {TOTAL_FOLDERS_DELETED}", style="bold red"
+        )
         console.print(f"Total Files Added: {TOTAL_FILES_ADDED} ", style="bold green")
-        console.print(f"Total Files Renamed: {TOTAL_FILES_RENAMED} ", style="bold green")
+        console.print(
+            f"Total Files Renamed: {TOTAL_FILES_RENAMED} ", style="bold green"
+        )
         console.print(f"Total Time Spent: {total_time:.2f} seconds", style="blue")
 
         label.pack()
@@ -634,19 +606,14 @@ def movie_rename(file_or_folder):
             state="normal",
             text_color="Green",
         )
-            
-
-
-
 
 
 # TV RENAMER
 
+
 def tv_renamer(file_or_folder):
-    
     count = []
-    
-    
+
     start_time = time.perf_counter()
 
     TOTAL_FILES_DELETED = 0
@@ -698,7 +665,6 @@ def tv_renamer(file_or_folder):
     ]
 
     for path, dirs, files in os.walk(file_or_folder):
-
         for name in files:
             rename_path = pathlib.PurePath(path, name)
             print(rename_path)
@@ -708,67 +674,54 @@ def tv_renamer(file_or_folder):
             )
 
             len_file = num_files
-            
+
             dib = dirs
-            
+
             print(dib)
-            
 
             # if ext not in name then dont do anything else rename
             if not name.endswith(tuple(ext)):
                 continue
 
-
             else:
                 # Extract the file name and extension from the file path
                 base_name, ext = os.path.splitext(name)
-                
+
                 title = None
                 year = None
-                
-                
+
                 max_similarity_ratio = 0
                 episode_name = None
 
-                
-                match_3 = PTN.parse(base_name, standardise=False,coherent_types=True)
-        
+                match_3 = PTN.parse(base_name, standardise=False, coherent_types=True)
 
-                if 'title' in match_3:
-                    title =  match_3["title"]
+                if "title" in match_3:
+                    title = match_3["title"]
                     rich.print("Title:", title)
 
-                        
-                                    
-                if 'season' in match_3:
-                    season = match_3.get('season', [])[0]
+                if "season" in match_3:
+                    season = match_3.get("season", [])[0]
                     rich.print("Season:", season)
-                    
-                    
-                if  'episodeName' in match_3:
-                    episode = match_3.get('episodeName', [])
-                    rich.print("episodeName:", episode)    
-                
-                
-                if 'year' in match_3:
+
+                if "episodeName" in match_3:
+                    episode = match_3.get("episodeName", [])
+                    rich.print("episodeName:", episode)
+
+                if "year" in match_3:
                     data = match_3
-                    year = data.get('year', [])[0]
+                    year = data.get("year", [])[0]
                     rich.print("Year:", year)
-            
-                    
-                if 'episode' in match_3:
-                    episode = match_3.get('episode', [])[0]
+
+                if "episode" in match_3:
+                    episode = match_3.get("episode", [])[0]
                     rich.print("Episode:", episode)
-                
-                
-                if 'documentary' in match_3:
-                    documentary = match_3.get('documentary', [])
+
+                if "documentary" in match_3:
+                    documentary = match_3.get("documentary", [])
                     rich.print("Documentary:", documentary)
-           
-        
-                         
-                if IndexError:                         
-                    pattern = r'^(\w+)\s(.+)$'  
+
+                if IndexError:
+                    pattern = r"^(\w+)\s(.+)$"
                     match = re.search(pattern, base_name)
 
                     if match:
@@ -776,138 +729,141 @@ def tv_renamer(file_or_folder):
                         episode = match.group(2)
                         print("Name:", name)
                         print("Title:", title)
-                        
-           
-                                
-                query_params = {'api_key': API_KEY, 'query': title, 'year': year, 'include_adult': True, 'with_genres': 0}
 
-                url = f"https://api.themoviedb.org/3/search/tv?{urlencode(query_params)}"
+                query_params = {
+                    "api_key": API_KEY,
+                    "query": title,
+                    "year": year,
+                    "include_adult": True,
+                    "with_genres": 0,
+                }
 
-                
+                url = (
+                    f"https://api.themoviedb.org/3/search/tv?{urlencode(query_params)}"
+                )
+
                 response = requests.get(url)
-                
+
                 data = response.json()
-                
+
                 rich.print(data)
-                
-                                
-                t_name = data['results'][0]['name']
-                t_date = data['results'][0]['first_air_date']
-                
+
+                t_name = data["results"][0]["name"]
+                t_date = data["results"][0]["first_air_date"]
+
                 t_date = t_date[:4]
-                     
+
                 count.append(t_name)
-                
-                
 
                 # Check if any TV show matches the search query
-                if data.get('results'):
-                            # Get the ID of the first TV show in the search results (you can handle multiple results as needed)
-                            tv_show_id = data['results'][0]['id']
+                if data.get("results"):
+                    # Get the ID of the first TV show in the search results (you can handle multiple results as needed)
+                    tv_show_id = data["results"][0]["id"]
 
-                            # Now, use the TV show ID to fetch information about its seasons
-                            season_url = f"https://api.themoviedb.org/3/tv/{tv_show_id}?api_key={API_KEY}"
+                    # Now, use the TV show ID to fetch information about its seasons
+                    season_url = f"https://api.themoviedb.org/3/tv/{tv_show_id}?api_key={API_KEY}"
 
-                            season_response = requests.get(season_url)
-                            season_data = season_response.json()
-                            
+                    season_response = requests.get(season_url)
+                    season_data = season_response.json()
 
-                            # Print information about seasons and episodes
-                            rich.print("Seasons:")
-                            for season in season_data['seasons']:
-                                rich.print(f"Season {season['season_number']}: {season['name']}")
+                    # Print information about seasons and episodes
+                    rich.print("Seasons:")
+                    for season in season_data["seasons"]:
+                        rich.print(
+                            f"Season {season['season_number']}: {season['name']}"
+                        )
 
-                                # Now, fetch information about episodes for each season
-                                episode_url = f"https://api.themoviedb.org/3/tv/{tv_show_id}/season/{season['season_number']}?api_key={API_KEY}"
-                                episode_response = requests.get(episode_url)
-                                episode_data = episode_response.json()
-                                rich.print("Episodes:")
+                        # Now, fetch information about episodes for each season
+                        episode_url = f"https://api.themoviedb.org/3/tv/{tv_show_id}/season/{season['season_number']}?api_key={API_KEY}"
+                        episode_response = requests.get(episode_url)
+                        episode_data = episode_response.json()
+                        rich.print("Episodes:")
 
-                
+                        for episode_i in episode_data["episodes"]:
+                            episode_number = episode_i["episode_number"]
+                            ep_n = episode_i["name"]
+                            print(episode_number)
 
-                                for episode_i in episode_data['episodes']:
-                                    episode_number = episode_i['episode_number']
-                                    ep_n = episode_i['name']
-                                    print(episode_number)
+                            # Calculate similarity_ratio using fuzzywuzzy
+                            similarity_ratio = fuzz.ratio(
+                                str(episode), str(episode_number)
+                            )
 
-                                    # Calculate similarity_ratio using fuzzywuzzy
-                                    similarity_ratio = fuzz.ratio(str(episode), str(episode_number))
+                            if similarity_ratio > max_similarity_ratio:
+                                max_similarity_ratio = similarity_ratio
+                                episode_name = ep_n
+                                episode = episode_number
 
+                            print(
+                                "Similarity Ratio:",
+                                similarity_ratio,
+                                "BASE_NAME:",
+                                base_name,
+                                "API_ONE:",
+                                episode_name,
+                            )
 
-                                    if similarity_ratio > max_similarity_ratio:
-                                        max_similarity_ratio = similarity_ratio
-                                        episode_name = ep_n
-                                        episode = episode_number
-                                                    
-                                    
-                                    print("Similarity Ratio:", similarity_ratio, "BASE_NAME:", base_name, "API_ONE:", episode_name)
+                            new_file_name = f"{t_name} - S{season['season_number']:02d}E{episode:02d} - {episode_name}{ext}"
+                            rich.print(new_file_name)
 
-                                    new_file_name = f"{t_name} - S{season['season_number']:02d}E{episode:02d} - {episode_name}{ext}"
-                                    rich.print(new_file_name)
+                        tv_folder = f"{t_name} ({t_date})"
+                        season_folder = f"Season {season['season_number']:02d}"
 
+                        folder_path = os.path.join(file_or_folder, tv_folder)
+                        season_path = os.path.join(folder_path, season_folder)
 
-                                tv_folder = f"{t_name} ({t_date})"
-                                season_folder = f"Season {season['season_number']:02d}"
+                        if not os.path.exists(folder_path):
+                            os.makedirs(folder_path)
 
-                                folder_path = os.path.join(file_or_folder, tv_folder)
-                                season_path = os.path.join(folder_path, season_folder)
+                        if not os.path.exists(season_path):
+                            os.makedirs(season_path)
 
-                                if not os.path.exists(folder_path):
-                                    os.makedirs(folder_path)
+                        i = 1
 
-                                if not os.path.exists(season_path):
-                                    os.makedirs(season_path)
-                                    
-                              
-                                i = 1
+                        # Get the old file path
+                        old_file_path = os.path.join(path, name)
 
-                                # Get the old file path
-                                old_file_path = os.path.join(path, name)
-                                
+                        # Create the new file path
+                        new_file_path = os.path.join(season_path, new_file_name)
 
-                                # Create the new file path
-                                new_file_path = os.path.join(season_path, new_file_name)
-                                
-                                tv_progressbar.start()
+                        tv_progressbar.start()
 
-                                # Rename the file
-                                try:
-                                    os.rename(old_file_path, new_file_path)
-                                          
-                                except OSError as e:
-                                    print(f"An error occurred while renaming the file: {e}")
-                                    continue
-                                    
-                                
-                                tv_progressbar.stop()
-                                                                  
-                                with tqdm(total=i, desc="Renaming : ", unit="Files") as pbar:
-                                            time.sleep(1)
-                                            pbar.update(1)
-                                            tv_p = pbar.n / i * 100
-                                            pbar.update()
-                                            tv_per = str(int(tv_p))
-                                            tv_precent.configure(text=tv_per + "%")
-                                            tv_precent.update()
-                                            tv_progressbar.set(pbar.n / i )
-                                            tv_progressbar.update()    
-                                
-                                TOTAL_FILES_RENAMED += 1  
-                                
-                                remove_empty_directories(file_or_folder)                      
-                        
+                        # Rename the file
+                        try:
+                            os.rename(old_file_path, new_file_path)
+
+                        except OSError as e:
+                            print(f"An error occurred while renaming the file: {e}")
+                            continue
+
+                        tv_progressbar.stop()
+
+                        with tqdm(total=i, desc="Renaming : ", unit="Files") as pbar:
+                            time.sleep(1)
+                            pbar.update(1)
+                            tv_p = pbar.n / i * 100
+                            pbar.update()
+                            tv_per = str(int(tv_p))
+                            tv_precent.configure(text=tv_per + "%")
+                            tv_precent.update()
+                            tv_progressbar.set(pbar.n / i)
+                            tv_progressbar.update()
+
+                        TOTAL_FILES_RENAMED += 1
+
+                        remove_empty_directories(file_or_folder)
+
                 if t_name in count:
                     print("Already Proccesing")
                     continue
-                
-                if FileExistsError:
-                    continue                     
 
+                if FileExistsError:
+                    continue
 
     end_time = time.perf_counter()
 
     total_time = end_time - start_time
-    
+
     console.print(f"Total Files Deleted: {TOTAL_FILES_DELETED}", style="bold red")
     console.print(f"Total Folders Deleted: {TOTAL_FOLDERS_DELETED}", style="bold red")
     console.print(f"Total Files Added: {TOTAL_FILES_ADDED} ", style="bold green")
@@ -925,7 +881,6 @@ def tv_renamer(file_or_folder):
     )
 
 
-      
 def backup():
     start = time.perf_counter()
     TOTAL_BACKUP = 0
@@ -971,7 +926,7 @@ def backup():
                             shutil.copytree(src, dst)
                         else:
                             shutil.copy2(src, dst)
-                            
+
                         pbar.update(1)
                         bak_ = pbar.n / total_files * 100
                         per = str(int(bak_))
@@ -1096,8 +1051,6 @@ def start_processing():
     processing_thread.start()
 
 
-
-
 def start_processing_tv():
     global processing_thread
 
@@ -1150,8 +1103,7 @@ file_folder_listbox.configure(
     border_color="#212121",
     corner_radius=3.2,
 )
-file_folder_listbox.pack(fill=ctk.BOTH,expand=True)
-
+file_folder_listbox.pack(fill=ctk.BOTH, expand=True)
 
 
 serc = ctk.CTkTextbox(fe, height=650, width=1500)
@@ -1165,7 +1117,7 @@ serc.configure(
     border_color="#212121",
     corner_radius=3.2,
 )
-serc.pack(fill=ctk.BOTH,expand=True)
+serc.pack(fill=ctk.BOTH, expand=True)
 
 
 serc = ctk.CTkLabel(fe, height=0, width=0)
@@ -1173,12 +1125,10 @@ serc.pack()
 
 serc.configure(
     text=f"🛠 IN PROGRESS",
-    font=("Impact", 18),
+    font=("Segeo UI", 18),
     state="normal",
     text_color="#d4af2a",
-
 )
-
 
 
 rem = ctk.CTkTextbox(rmf, height=650, width=1500)
@@ -1191,10 +1141,8 @@ rem.configure(
     text_color="#b37c25",
     border_color="#212121",
     corner_radius=3.2,
-
 )
-rem.pack(fill=ctk.BOTH,expand=True)
-
+rem.pack(fill=ctk.BOTH, expand=True)
 
 
 bak_ups = ctk.CTkTextbox(done, height=650, width=1500)
@@ -1208,7 +1156,7 @@ bak_ups.configure(
     border_color="#212121",
     corner_radius=3.2,
 )
-bak_ups.pack(fill=ctk.BOTH,expand=True)
+bak_ups.pack(fill=ctk.BOTH, expand=True)
 
 
 button_2 = ctk.CTkButton(
@@ -1231,7 +1179,7 @@ button_3 = ctk.CTkButton(
     image=image_3,
     compound="left",
     font=("Segeo UI", 20),
-    command=start_processing_tv
+    command=start_processing_tv,
 )
 
 button_3.pack(side="left", padx=20, pady=20, expand=True)
@@ -1289,18 +1237,15 @@ button_7 = ctk.CTkButton(
 button_7.grid(row=3, column=0, padx=20, pady=55, sticky="nsew")
 
 
-
-
-
 # PROGRESS BAR
 
 
 bak_precent = ctk.CTkLabel(bu, text="0%")
-bak_precent.place(x=140, y=140) 
+bak_precent.place(x=140, y=140)
 
 bak_progressbar = ctk.CTkProgressBar(bu, orientation="horizontal", mode="determinate")
 bak_progressbar.configure(progress_color="green")
-bak_progressbar.place(x=40, y=170) 
+bak_progressbar.place(x=40, y=170)
 
 bak_progressbar.set(0)
 
@@ -1336,7 +1281,6 @@ del_progressbar.set(0)
 
 
 if __name__ == "__main__":
-    
     colorama.init()
     console = Console()
     ver = Text("\nVersion: 0.1.0")
@@ -1351,14 +1295,15 @@ if __name__ == "__main__":
     RED = "\x1b[1;31;40m"
 
     nf = "PLEX BACKUPS"
+    
+    if os.name == "nt":
+        user_home = os.environ["USERPROFILE"]
+        src_root = os.path.join(user_home, "AppData", "Local")
+        dst_root = os.path.join(user_home, "Documents")
 
-    user_home = os.environ["USERPROFILE"]
-    src_root = os.path.join(user_home, "AppData", "Local")
-    dst_root = os.path.join(user_home, "Documents")
-
-    nff = os.path.join(dst_root, nf)
-    if not os.path.exists(nff):
-        os.mkdir(nff)
+        nff = os.path.join(dst_root, nf)
+        if not os.path.exists(nff):
+            os.mkdir(nff)
 
     folder_name = "Plex Media Server"
     stop_flag = False
