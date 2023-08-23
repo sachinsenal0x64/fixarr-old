@@ -3,6 +3,7 @@ __author__ = "FIXARR"
 __version__ = "0.1.0"
 
 
+
 import re
 import pathlib
 import requests
@@ -768,7 +769,7 @@ def tv_renamer(file_or_folder):
 
                     count.append(t_name)
                 except:
-                    pass
+                    rich.print("Movie Skipped...")
 
                 # Check if any TV show matches the search query
                 if data.get("results"):
