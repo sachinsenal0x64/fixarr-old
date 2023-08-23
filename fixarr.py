@@ -545,7 +545,9 @@ def movie_renamer(file_or_folder):
                     print(date)
 
                     # Construct the new file name with the extracted movie title, release year, and original file extension
-                    new_name = f"{result} ({date}){ext}" if year else f"{result} ({date}){ext}"
+                    new_name = (
+                        f"{result} ({date}){ext}" if year else f"{result} ({date}){ext}"
+                    )
 
                     i = 1
 
@@ -696,7 +698,6 @@ def tv_renamer(file_or_folder):
 
                 year = None
 
-
                 base_name, ext = os.path.splitext(name)
 
                 max_similarity_ratio = 0
@@ -771,7 +772,9 @@ def tv_renamer(file_or_folder):
                     tv_show_id = data["results"][0]["id"]
 
                     # Now, use the TV show ID to fetch information about its seasons
-                    season_url = f"https://api.themoviedb.org/3/tv/{tv_show_id}?api_key={tmdb}"
+                    season_url = (
+                        f"https://api.themoviedb.org/3/tv/{tv_show_id}?api_key={tmdb}"
+                    )
 
                     season_response = requests.get(season_url)
                     season_data = season_response.json()
@@ -812,8 +815,6 @@ def tv_renamer(file_or_folder):
                                 "API_ONE:",
                                 episode_name,
                             )
-
-
 
                         new_file_name = f"{t_name} - S{season['season_number']:02d}E{episode:02d} - {episode_name} ({t_date}){ext}"
                         rich.print(new_file_name)
@@ -868,10 +869,6 @@ def tv_renamer(file_or_folder):
                         TOTAL_FILES_RENAMED += 1
 
                         remove_empty_directories(file_or_folder)
-
-                if t_name in count:
-                    print("Already Proccesing")
-                    continue
 
                 if FileExistsError:
                     continue
