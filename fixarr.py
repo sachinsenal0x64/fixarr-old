@@ -389,7 +389,7 @@ def browse():
                     file_folder_listbox.insert("end", file_path + "\n")
                     file_folder_listbox.configure(state="disabled")
 
-        file_rename(result)
+        movie_rename(result)
         return result
     return None
 
