@@ -695,7 +695,7 @@ def tv_renamer(file_or_folder):
                 # Extract the file name and extension from the file path
 
                 year = None
-                
+
 
                 base_name, ext = os.path.splitext(name)
 
@@ -844,6 +844,9 @@ def tv_renamer(file_or_folder):
                         try:
                             if not os.path.exists(new_file_path):
                                 os.rename(old_file_path, new_file_path)
+
+                            else:
+                                rich.print("File Exists")
 
                         except OSError as e:
                             print(f"An error occurred while renaming the file: {e}")
