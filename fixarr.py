@@ -34,7 +34,7 @@ import rich
 from itertools import islice
 import PTN
 from thefuzz import fuzz, process
-import ctypes
+
 
 
 
@@ -78,26 +78,29 @@ path_to_app_6 = path.join(budle_dir, "assets", "emby.png")
 path_to_app_7 = path.join(budle_dir, "assets", "logout.png")
 
 
-if platform.uname()[0] == "Windows":
-    ctypes.windll.shcore.SetProcessDpiAwareness(2)
-    user32 = ctypes.windll.user32
-    screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 
-    if screensize[0] == 3840 and screensize[1] == 2160:
+
+
+WIDTH, HEIGHT = app.winfo_screenwidth(), app.winfo_screenheight()
+
+
+if platform.system() == "Windows":
+
+    if WIDTH == 3840 and HEIGHT == 2160:
         app.geometry("1500x900")
         ctk.set_widget_scaling(2.0)
 
-    elif screensize[0] == 2560 and screensize[1] == 1440:
+    elif WIDTH == 2560 and HEIGHT == 1440:
         app.geometry("1388x800")
         ctk.set_widget_scaling(1.0)
 
-    elif screensize[0] == 1920 and screensize[1] == 1080:
+    elif WIDTH == 1920 and HEIGHT == 1080:
         app.geometry("1388x768")
 
-    elif screensize[0] == 1600 and screensize[1] == 900:
+    elif WIDTH == 1600 and HEIGHT == 900:
         app.geometry("1350x580")
 
-    elif screensize[0] == 1280 and screensize[1] == 720:
+    elif WIDTH == 1280 and HEIGHT == 720:
         app.geometry("1230x490")
 
     else:
@@ -107,8 +110,28 @@ if platform.uname()[0] == "Windows":
 
 
 
-elif platform.uname()[0] == "Linux":
-    
+if platform.system() == "Linux":
+
+    if WIDTH == 3840 and HEIGHT == 2160:
+        app.geometry("1500x900")
+        ctk.set_widget_scaling(2.0)
+
+    elif WIDTH == 2560 and HEIGHT == 1440:
+        app.geometry("1388x800")
+        ctk.set_widget_scaling(1.0)
+
+    elif WIDTH == 1920 and HEIGHT == 1080:
+        app.geometry("1388x768")
+
+    elif WIDTH == 1600 and HEIGHT == 900:
+        app.geometry("1350x580")
+
+    elif WIDTH == 1280 and HEIGHT == 720:
+        app.geometry("1230x490")
+
+    else:
+        app.geometry("1000x600")
+
     log= Image.open(path_to_app_1)
     logo = ImageTk.PhotoImage(log)
 
@@ -333,7 +356,7 @@ def deletes(result):
 
         label_8.configure(
             text=f"✅ TOTAL : {TOTAL_FILES_DELETED} FILES DELETED",
-            font=("Impact", 18),
+            font=("Segeo UI", 18),
             state="normal",
             text_color="#bf214b",
         )
@@ -608,7 +631,7 @@ def movie_rename(file_or_folder):
 
         label.configure(
             text=f"✅ TOTAL : {TOTAL_FILES_RENAMED} FILES RENAMED",
-            font=("Impact", 18),
+            font=("Segeo UI", 18),
             state="normal",
             text_color="Green",
         )
@@ -881,7 +904,7 @@ def tv_renamer(file_or_folder):
 
     label.configure(
         text=f"✅ TOTAL : {TOTAL_FILES_RENAMED} FILES RENAMED",
-        font=("Impact", 18),
+        font=("Segeo UI", 18),
         state="normal",
         text_color="Green",
     )
@@ -991,7 +1014,7 @@ def backup():
 
         label_2.configure(
             text=f"✅ Total Backup Added: {TOTAL_BACKUP}",
-            font=("Impact", 18),
+            font=("Segeo UI", 18),
             state="normal",
             text_color="Green",
         )
@@ -1286,6 +1309,7 @@ del_progressbar.place(x=40, y=170)
 del_progressbar.set(0)
 
 
+
 if __name__ == "__main__":
     colorama.init()
     console = Console()
@@ -1302,7 +1326,8 @@ if __name__ == "__main__":
 
     nf = "PLEX BACKUPS"
     
-    if os.name == "nt":
+        
+    if platform == "Windows":
         user_home = os.environ["USERPROFILE"]
         src_root = os.path.join(user_home, "AppData", "Local")
         dst_root = os.path.join(user_home, "Documents")
@@ -1310,6 +1335,13 @@ if __name__ == "__main__":
         nff = os.path.join(dst_root, nf)
         if not os.path.exists(nff):
             os.mkdir(nff)
+
+    elif platform == "Linux":
+        pass
+    
+
+    elif platform == "Darwin":
+        pass
 
     folder_name = "Plex Media Server"
     stop_flag = False
