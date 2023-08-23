@@ -693,13 +693,13 @@ def tv_renamer(file_or_folder):
 
             else:
                 # Extract the file name and extension from the file path
+
+                year = None
+                
+
                 base_name, ext = os.path.splitext(name)
 
-                title = None
-                year = None
-
                 max_similarity_ratio = 0
-                episode_name = None
 
                 match_3 = PTN.parse(base_name, standardise=False, coherent_types=True)
 
@@ -762,7 +762,6 @@ def tv_renamer(file_or_folder):
 
                     t_date = t_date[:4]
 
-                    count.append(t_name)
                 except:
                     rich.print("Movie Skipped...")
 
@@ -814,8 +813,10 @@ def tv_renamer(file_or_folder):
                                 episode_name,
                             )
 
-                            new_file_name = f"{t_name} - S{season['season_number']:02d}E{episode:02d} - {episode_name} ({year}){ext} " if year else f"{t_name} - S{season['season_number']:02d}E{episode:02d} - {episode_name} ({t_date}){ext}"
-                            rich.print(new_file_name)
+
+
+                        new_file_name = f"{t_name} - S{season['season_number']:02d}E{episode:02d} - {episode_name} ({t_date}){ext}"
+                        rich.print(new_file_name)
 
                         tv_folder = f"{t_name} ({t_date})"
                         season_folder = f"Season {season['season_number']:02d}"
@@ -841,7 +842,7 @@ def tv_renamer(file_or_folder):
 
                         # Rename the file
                         try:
-                            if not t_name in count:
+                            if not os.path.exists(new_file_path):
                                 os.rename(old_file_path, new_file_path)
 
                         except OSError as e:
