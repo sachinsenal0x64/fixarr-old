@@ -50,35 +50,6 @@ tmdb = os.getenv("TMDB_API_KEY")
 
 
 
-if platform.uname()[0] == "Windows":
-    ctypes.windll.shcore.SetProcessDpiAwareness(2)
-    user32 = ctypes.windll.user32
-    screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
-
-    if screensize[0] == 3840 and screensize[1] == 2160:
-        app.geometry("1500x900")
-        ctk.set_widget_scaling(2.0)
-
-    elif screensize[0] == 2560 and screensize[1] == 1440:
-        app.geometry("1388x800")
-        ctk.set_widget_scaling(1.0)
-
-    elif screensize[0] == 1920 and screensize[1] == 1080:
-        app.geometry("1388x768")
-
-    elif screensize[0] == 1600 and screensize[1] == 900:
-        app.geometry("1350x580")
-
-    elif screensize[0] == 1280 and screensize[1] == 720:
-        app.geometry("1230x490")
-
-    else:
-        app.geometry("1000x600")
-
-# elif platform.uname()[0] == "Linux":
-#     continue
-
-
 
 budle_dir = getattr(sys, "_MEIPASS", path.abspath(path.dirname(__file__)))
 
@@ -107,15 +78,50 @@ path_to_app_6 = path.join(budle_dir, "assets", "emby.png")
 path_to_app_7 = path.join(budle_dir, "assets", "logout.png")
 
 
+if platform.uname()[0] == "Windows":
+    ctypes.windll.shcore.SetProcessDpiAwareness(2)
+    user32 = ctypes.windll.user32
+    screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+
+    if screensize[0] == 3840 and screensize[1] == 2160:
+        app.geometry("1500x900")
+        ctk.set_widget_scaling(2.0)
+
+    elif screensize[0] == 2560 and screensize[1] == 1440:
+        app.geometry("1388x800")
+        ctk.set_widget_scaling(1.0)
+
+    elif screensize[0] == 1920 and screensize[1] == 1080:
+        app.geometry("1388x768")
+
+    elif screensize[0] == 1600 and screensize[1] == 900:
+        app.geometry("1350x580")
+
+    elif screensize[0] == 1280 and screensize[1] == 720:
+        app.geometry("1230x490")
+
+    else:
+        app.geometry("1000x600")
+
+    app.iconbitmap(path_to_app_1)
+
+
+
+elif platform.uname()[0] == "Linux":
+    
+    log= Image.open(path_to_app_1)
+    logo = ImageTk.PhotoImage(log)
+
+    app.tk.call('wm', 'iconphoto', app._w, logo)
+
+
+
+
+
 
 app.title("FIXARR")
 
 app.resizable(width=True, height=True)
-
-log= Image.open(path_to_app_1)
-logo = ImageTk.PhotoImage(log)
-
-app.tk.call('wm', 'iconphoto', app._w, logo)
 
 
 
