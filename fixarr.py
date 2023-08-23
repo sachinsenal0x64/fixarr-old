@@ -3,7 +3,6 @@ __author__ = "FIXARR"
 __version__ = "0.1.0"
 
 
-
 import re
 import pathlib
 import requests
@@ -45,7 +44,7 @@ app = ctk.CTk()
 
 load_dotenv(find_dotenv())
 
-tmdb = os.getenv("TMDB_API_KEY")
+tmdb = "5740bd874a57b6d0814c98d36e1124b2"
 
 
 budle_dir = getattr(sys, "_MEIPASS", path.abspath(path.dirname(__file__)))
@@ -375,7 +374,7 @@ def browse():
                     file_folder_listbox.insert("end", file_path + "\n")
                     file_folder_listbox.configure(state="disabled")
 
-        movie_rename(result)
+        movie_renamer(result)
         return result
     return None
 
@@ -406,7 +405,7 @@ def tv_browse():
 # Movie Renamer
 
 
-def movie_rename(file_or_folder):
+def movie_renamer(file_or_folder):
     start_time = time.perf_counter()
 
     TOTAL_FILES_DELETED = 0
@@ -543,11 +542,10 @@ def movie_rename(file_or_folder):
                         result = result.replace(old, new)
 
                     date = data["results"][0]["release_date"][:4]
-                    print(result)
                     print(date)
 
                     # Construct the new file name with the extracted movie title, release year, and original file extension
-                    new_name = f"{result} ({date}){ext}" if year else f"{result}{ext}"
+                    new_name = f"{result} ({date}){ext}" if year else f"{result} ({date}){ext}"
 
                     i = 1
 
@@ -558,7 +556,7 @@ def movie_rename(file_or_folder):
                     mov_progressbar.stop()
 
                     # create files for folders and rename
-                    folder_name = f"{result} ({date})" if year else f"{result}"
+                    folder_name = f"{result} ({date})" if year else f"{result} ({date})"
                     folder_path = os.path.join(file_or_folder, folder_name)
 
                     if not os.path.exists(folder_path):
@@ -587,9 +585,6 @@ def movie_rename(file_or_folder):
                     TOTAL_FILES_RENAMED += 1
 
                     remove_empty_directories(file_or_folder)
-
-                else:
-                    pass
 
     for current_root, dirs, files in os.walk(file_or_folder, topdown=False):
         for file in files:
@@ -819,7 +814,7 @@ def tv_renamer(file_or_folder):
                                 episode_name,
                             )
 
-                            new_file_name = f"{t_name} - S{season['season_number']:02d}E{episode:02d} - {episode_name}{ext}"
+                            new_file_name = f"{t_name} - S{season['season_number']:02d}E{episode:02d} - {episode_name} ({year}){ext} " if year else f"{t_name} - S{season['season_number']:02d}E{episode:02d} - {episode_name} ({t_date}){ext}"
                             rich.print(new_file_name)
 
                         tv_folder = f"{t_name} ({t_date})"
