@@ -29,7 +29,7 @@ import customtkinter as ctk
 from PIL import Image, ImageTk
 import tkinter as tk
 from tkinter import simpledialog, filedialog
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 import rich
 from itertools import islice
 import PTN
@@ -42,9 +42,9 @@ ctk.set_default_color_theme("dark-blue")
 
 app = ctk.CTk()
 
-load_dotenv(find_dotenv())
+load_dotenv()
 
-tmdb = "5740bd874a57b6d0814c98d36e1124b2"
+tmdb = "5740bd874a57b6d0814c98d36e1124b2" or os.getenv("TMDB_API_KEY")
 
 
 budle_dir = getattr(sys, "_MEIPASS", path.abspath(path.dirname(__file__)))
