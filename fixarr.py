@@ -1,6 +1,6 @@
 __author__ = "FIXARR"
 
-__version__ = "2.0.0"
+__version__ = "0.1.0"
 
 
 import re
@@ -1325,8 +1325,8 @@ if __name__ == "__main__":
     RED = "\x1b[1;31;40m"
 
     nf = "PLEX BACKUPS"
-    
-        
+
+
     if platform == "Windows":
         user_home = os.environ["USERPROFILE"]
         src_root = os.path.join(user_home, "AppData", "Local")
