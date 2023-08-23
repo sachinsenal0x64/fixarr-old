@@ -621,7 +621,7 @@ def tv_renamer(file_or_folder):
     TOTAL_FILES_ADDED = 0
     TOTAL_FILES_RENAMED = 0
 
-    API_KEY = "6001ceb85e9ef2c42ab120589d2ffe68"
+    API_KEY = tmdb
 
     ext = [
         ".webm",
