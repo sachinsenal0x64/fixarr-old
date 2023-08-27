@@ -63,7 +63,7 @@
 
 ### 🏮 YOU DONT WANT TO COMPILE FROM SOURCE CODE ITS OPTIONAL. YOU CAN GET PREBUILD INSTALLER FROM [RELEASES](https://github.com/sachinsenal0x64/FIXARR/releases)
 
-
+## From Source
 
 <br>
 
