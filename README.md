@@ -144,7 +144,7 @@ or just run .bat File also you can create bat_shortcut
 
 <br>
 
-#### IF YOU WANT TO MAKE OWN STANDALONE APP (AKA .EXE / .BIN) USE NUITKA TO COMPILE SOURCE CODE INTO C 
+#### IF YOU WANT TO MAKE OWN STANDALONE APP (AKA .EXE or .BIN) USE NUITKA TO COMPILE SOURCE CODE INTO C 
 <br>
 
 ```compile
