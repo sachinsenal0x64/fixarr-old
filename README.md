@@ -172,7 +172,8 @@ nuitka3 --clang --standalone --windows-icon-from-ico=./assets/favicon.ico --incl
 
 ## 💡 CREDITS
 
-#### THEMOVIEDB.OEG
+#### MOVIE API = THEMOVIEDB.ORG
+
 <p style="text-align:center;" align="center">
    <a href="https://www.themoviedb.org">
   <img align="center" src="https://github.com/FIXARR/FIXARR/blob/279c46c7744bfdbb2e99dd802637cea65d2fdc3d/assets/tmdb.svg" height="200"/>
