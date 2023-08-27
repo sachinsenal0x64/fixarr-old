@@ -172,7 +172,8 @@ nuitka3 --clang --standalone --windows-icon-from-ico=./assets/favicon.ico --incl
 
 ## 💡 CREDITS
 
-#### MOVIE API = THEMOVIEDB.ORG
+#### MOVIE API & TV :  [THEMOVIEDB.ORG][https://wwww.themoviedb.org]
+#### PARSER LIBARY FOR TV SERIES: [PTN PROJECT](https://github.com/platelminto/parse-torrent-title)
 
 <p style="text-align:center;" align="center">
    <a href="https://www.themoviedb.org">
