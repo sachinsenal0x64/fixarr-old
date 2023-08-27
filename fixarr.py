@@ -1,4 +1,4 @@
-__author__ = "FIXARR"
+__author__ = "sachinsenal"
 
 __version__ = "0.1.0"
 
@@ -253,7 +253,7 @@ def remove_empty_directories(directory):
 
 label_8 = ctk.CTkLabel(rmf, height=0, width=0)
 label = ctk.CTkLabel(out, height=0, width=0)
-
+label_2 = ctk.CTkLabel(done,height=0, width=0)
 
 def del_fi():
     result = filedialog.askdirectory()
@@ -331,13 +331,12 @@ def deletes(result):
                         os.remove(os.path.join(path, name))
                         TOTAL_FILES_DELETED += 1
 
-        for current_root, dirs, files in os.walk(result, topdown=False):
-            for file in files:
-                rem.configure(state="normal")
-                file_path = os.path.join(current_root, file)
-                # rem.delete("1.0", "end")
-                rem.insert("end", file_path + "\n")
-                rem.configure(state="disabled")
+
+            rem.configure(state="normal")
+            file_path = os.path.join(path, name)
+            # rem.delete("1.0", "end")
+            rem.insert("end", file_path + "\n")
+            rem.configure(state="disabled")
 
         label_8.configure(
             text=f"✅ TOTAL : {TOTAL_FILES_DELETED} FILES DELETED",
@@ -996,7 +995,7 @@ def backup():
 
                 shutil.move(backup_path, root_path)
 
-                end_file = shutil.move(root_path, nff)
+                end_files = shutil.move(root_path, nff)
 
                 end = time.perf_counter()
                 TOTAL_BACKUP += 1
@@ -1006,8 +1005,13 @@ def backup():
         console.print("Process Completed ! \n", style="#87ff00")
         console.print(f"Total Backup Added: {TOTAL_BACKUP} ", style="bold green")
 
-        label_2 = ctk.CTkLabel(done, text="", height=0, width=0)
-        label_2.pack()
+
+        
+        
+        bak_ups.configure(state="normal")
+        # rem.delete("1.0", "end")
+        bak_ups.insert("end", end_files + "\n")
+        bak_ups.configure(state="disabled")
 
         label_2.configure(
             text=f"✅ Total Backup Added: {TOTAL_BACKUP}",
@@ -1015,18 +1019,10 @@ def backup():
             state="normal",
             text_color="Green",
         )
+        
+        
+        label_2.pack()
 
-        label_3 = ctk.CTkLabel(done, height=0, width=0)
-        label_3.pack()
-
-        label_3.configure(
-            text=f"{end_file}",
-            font=("Segeo UI", 20),
-            fg_color="#313131",
-            bg_color="#000000",
-            state="normal",
-            text_color="#a68017",
-        )
 
     except KeyboardInterrupt:
         time.sleep(1)
