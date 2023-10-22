@@ -34,6 +34,7 @@ import rich
 from itertools import islice
 import PTN
 from thefuzz import fuzz, process
+from concurrent.futures import ThreadPoolExecutor
 
 
 ctk.set_appearance_mode("dark")
@@ -44,7 +45,7 @@ app = ctk.CTk()
 
 load_dotenv()
 
-tmdb = os.getenv("TMDB_API_KEY","5740bd874a57b6d0814c98d36e1124b2")
+tmdb = os.getenv("TMDB_API_KEY", "5740bd874a57b6d0814c98d36e1124b2")
 
 
 budle_dir = getattr(sys, "_MEIPASS", path.abspath(path.dirname(__file__)))
@@ -77,7 +78,7 @@ path_to_app_7 = path.join(budle_dir, "assets", "logout.png")
 WIDTH, HEIGHT = app.winfo_screenwidth(), app.winfo_screenheight()
 
 
-if platform.system() == "Windows":
+if os.name == "nt":
     if WIDTH == 3840 and HEIGHT == 2160:
         app.geometry("1500x900")
         ctk.set_widget_scaling(2.0)
@@ -101,7 +102,7 @@ if platform.system() == "Windows":
     app.iconbitmap(path_to_app_1)
 
 
-if platform.system() == "Linux":
+if os.name == "posix":
     if WIDTH == 3840 and HEIGHT == 2160:
         app.geometry("1500x900")
         ctk.set_widget_scaling(2.0)
@@ -253,7 +254,7 @@ def remove_empty_directories(directory):
 
 label_8 = ctk.CTkLabel(rmf, height=0, width=0)
 label = ctk.CTkLabel(out, height=0, width=0)
-label_2 = ctk.CTkLabel(done,height=0, width=0)
+
 
 def del_fi():
     result = filedialog.askdirectory()
@@ -331,12 +332,13 @@ def deletes(result):
                         os.remove(os.path.join(path, name))
                         TOTAL_FILES_DELETED += 1
 
-
-            rem.configure(state="normal")
-            file_path = os.path.join(path, name)
-            # rem.delete("1.0", "end")
-            rem.insert("end", file_path + "\n")
-            rem.configure(state="disabled")
+        for current_root, dirs, files in os.walk(result, topdown=False):
+            for file in files:
+                rem.configure(state="normal")
+                file_path = os.path.join(current_root, file)
+                # rem.delete("1.0", "end")
+                rem.insert("end", file_path + "\n")
+                rem.configure(state="disabled")
 
         label_8.configure(
             text=f"✅ TOTAL : {TOTAL_FILES_DELETED} FILES DELETED",
@@ -995,7 +997,7 @@ def backup():
 
                 shutil.move(backup_path, root_path)
 
-                end_files = shutil.move(root_path, nff)
+                end_file = shutil.move(root_path, nff)
 
                 end = time.perf_counter()
                 TOTAL_BACKUP += 1
@@ -1005,13 +1007,8 @@ def backup():
         console.print("Process Completed ! \n", style="#87ff00")
         console.print(f"Total Backup Added: {TOTAL_BACKUP} ", style="bold green")
 
-
-        
-        
-        bak_ups.configure(state="normal")
-        # rem.delete("1.0", "end")
-        bak_ups.insert("end", end_files + "\n")
-        bak_ups.configure(state="disabled")
+        label_2 = ctk.CTkLabel(done, text="", height=0, width=0)
+        label_2.pack()
 
         label_2.configure(
             text=f"✅ Total Backup Added: {TOTAL_BACKUP}",
@@ -1019,10 +1016,18 @@ def backup():
             state="normal",
             text_color="Green",
         )
-        
-        
-        label_2.pack()
 
+        label_3 = ctk.CTkLabel(done, height=0, width=0)
+        label_3.pack()
+
+        label_3.configure(
+            text=f"{end_file}",
+            font=("Segeo UI", 20),
+            fg_color="#313131",
+            bg_color="#000000",
+            state="normal",
+            text_color="#a68017",
+        )
 
     except KeyboardInterrupt:
         time.sleep(1)
@@ -1327,10 +1332,10 @@ if __name__ == "__main__":
         if not os.path.exists(nff):
             os.mkdir(nff)
 
-    elif platform.system() == "Linux":
+    if platform == "Linux":
         pass
 
-    elif platform.system() == "Darwin":
+    if platform == "Darwin":
         pass
 
     folder_name = "Plex Media Server"
