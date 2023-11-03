@@ -42,12 +42,6 @@
 
 - 🐌 Slowly Develop
 
-<br>
-
-## 🏮 NOTE
-
-## 🚀 Some Features are Still in Development :)
-
 
 <br>
 
