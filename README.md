@@ -46,7 +46,7 @@
 <br>
 
 
-## 🆕 BETA CHANNEL
+## 🆕 CHANNELS
 
 [BETA](https://github.com/sachinsenal0x64/FIXARR) 
 <br>
