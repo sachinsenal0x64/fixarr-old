@@ -13,6 +13,17 @@
 
 <br>
 
+
+## 🆕 CHANNELS
+
+[NIGHTLY](https://github.com/sachinsenal0x64/FIXARR) 
+<br>
+[STABLE](https://github.com/FIXARR/fixarr)
+
+
+<br>
+
+
 ## 🚀 Features
 
 - 🎬 MOVIE RENAMER
@@ -41,15 +52,6 @@
 
 - 🐌 Slowly Develop
 
-
-<br>
-
-
-## 🆕 CHANNELS
-
-[NIGHTLY](https://github.com/sachinsenal0x64/FIXARR) 
-<br>
-[STABLE](https://github.com/FIXARR/fixarr)
 
 
 <br>
