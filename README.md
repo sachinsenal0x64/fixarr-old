@@ -1,38 +1,34 @@
-
 <p style="text-align:center;" align="center">
   <img align="center" src="https://cdn.jsdelivr.net/gh/sachinsenal0x64/picx-images-hosting@master/logov2.5sr31yyd76w0.png" width="256px" height="256px"/>
 </p>
 
 <h1 align="center"> 🛠️ FIXARR  </h1>
 
-<h4 align="center"> 🍿 Ultimate Movie | TV | Anime Renamer with Backup Media Servers (Plex | Emby | Jellyfin) </h4>
-  
-<br>
-<br>
+<h4 align="center"> 🍿 Ultimate Movie | TV | Anime Renamer with Backup Media Servers (Plex | Emby | Jellyfin)</h4>
+
+<br><br>
 
 # 💕 Community
 
 > 🍻 Join the community:  <a href="https://discord.gg/EbfftZ5Dd4">Discord</a>
 > [![](https://cdn.statically.io/gh/sachinsenal0x64/picx-images-hosting@master/discord.72y8nlaw5mdc.webp)](https://discord.gg/EbfftZ5Dd4)
-
+ 
 <br>
 
 # 🖼️ GUI
 
 ![FIXARR)](https://sachinsenal0x64.github.io/picx-images-hosting/Screenshot_20230920_223402.4i08ima1b4s0.png)
 
-<br>
 
+<br>
 
 ## 🆕 CHANNELS
 
-[NIGHTLY](https://github.com/sachinsenal0x64/FIXARR) 
-<br>
+[NIGHTLY](https://github.com/sachinsenal0x64/FIXARR) <br>
 [STABLE](https://github.com/FIXARR/fixarr)
 
 
 <br>
-
 
 ## 🚀 Features
 
@@ -44,9 +40,10 @@
 - ♻ PURG UNNECESSARY FILES (NFO,SRT)
 - 🐟 JELLYFIN BACKUP (⭕ in progress)
 - ❄ EMBY BACKUP (⭕ in progress)
-- ⏬ MOVIE & TV SEACHER (⭕ in progress) 
-- 💎 FALLBACK SERVERS  
-
+- ⏬ MOVIE & TV SEACHER (⭕ in progress)
+- 💎 FALLBACK SERVERS
+- ✅ CROSS PLATFORM SUPPORT
+  
 <br>
 
 ## 💡 Pros
@@ -61,7 +58,6 @@
 ## 👎 Cons
 
 - 🐌 Slowly Develop
-
 
 
 <br>
@@ -112,6 +108,9 @@ pip3 install customtkinter
 pip3 install -r requirements.txt
 python3 fixarr.py
 
+
+or just run .sh File
+
 ```
 
 <br>
@@ -129,6 +128,9 @@ brew install python-tk
 pip3 install customtkinter
 pip3 install -r requirements.txt
 python3 fixarr.py
+
+
+or just run .sh File
 
 ```
 
@@ -154,6 +156,8 @@ or just run .bat File also you can create bat_shortcut
 
 #### IF YOU WANT TO MAKE OWN STANDALONE APP (AKA .EXE or .BIN) USE NUITKA TO COMPILE SOURCE CODE INTO C 
 <br>
+
+### WINDOWS
 
 ```compile
 
